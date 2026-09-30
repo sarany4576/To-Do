@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #f4f5f7;
+  --card: #fff;
+  --text: #1f2937;
+  --muted: #9ca3af;
+  --line: #e5e7eb;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111827;
+    --card: #1f2937;
+    --text: #f3f4f6;
+    --muted: #6b7280;
+    --line: #374151;
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@layer components {
+  .card {
+    background: var(--card);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 14px rgba(0, 0, 0, 0.05);
+  }
+  .line { border-color: var(--line); }
+  .muted { color: var(--muted); }
+
+  .item {
+    max-height: 120px;
+    animation: item-in 0.25s ease;
+    transition: opacity 0.25s ease, transform 0.25s ease, max-height 0.25s ease, margin 0.25s ease;
+  }
+  .item.out {
+    opacity: 0;
+    transform: translateX(24px);
+    max-height: 0;
+    margin: 0;
+    overflow: hidden;
+  }
+}
+
+@keyframes item-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: none; }
+}
+
+input::placeholder { color: var(--muted); }
